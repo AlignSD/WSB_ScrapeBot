@@ -14,9 +14,9 @@ puppeteer.launch({ headless: true, args: ['--user-agent="Mozilla/5.0 (Macintosh;
         posts.forEach((item) => {
           let title = item.querySelector('h3').innerText;
           // console.log('title')
-          let votes = item.querySelector('[id*=upvote-button] div').innerText;
-          // let comments = item.querySelector('.icon-comment span').innerText;
-          // let link = item.querySelector('a').href;
+          let votes = item.querySelector('[id*=button] + div').innerText;
+          let comments = item.querySelector('.icon-comment + span').innerText;
+          let link = item.querySelector('a').href;
           let description = ''
           try{
             description = item.querySelector('p').innerText;
@@ -24,8 +24,7 @@ puppeteer.launch({ headless: true, args: ['--user-agent="Mozilla/5.0 (Macintosh;
 
           }
 
-          //postItems.push({title: title, votes: votes, comments: comments, link: link, description: description})
-          postItems.push({title: title, votes: votes, description: description})
+          postItems.push({title: title, votes: votes, comments: comments, link: link, description: description})
 
         })
         
@@ -42,7 +41,11 @@ puppeteer.launch({ headless: true, args: ['--user-agent="Mozilla/5.0 (Macintosh;
 }).catch(function(error) {
     console.error(error);
 });
-  // probably need to login to reddit
+
+// we are now able to scrape titles, vote count, comment count 
+// link to the post and a description
+
+
 
   // scrape most talked about tickers
 
